@@ -37,21 +37,21 @@ class CreateOrderCommand extends Command
      */
     public function handle()
     {
-        $request=$this->argument('order');
-        $order=$request->input('order');
-        $order=Order::create($order);
-        $items=$order['items'];
+        $order_items=$this->argument('order');
+        $order=Order::create($order_items);
+        $items=$order_items['items'];
+        $order_value=0;
         foreach ($items as $item) {
-            $item=$order->items()->create($item);
+            $item_element=$order->items()->create($item);
             $tags=$item['tags'];
+            $order_value+=$item['value'];
             foreach ($tags as $tag)
             {
-                $item->tags()->create(['name'=>$tag]);
+                $item_element->tags()->create(['name'=>$tag]);
             }
-
         }
 
-        return $order;
+        return $order_value;
 
     }
 }

@@ -33,7 +33,7 @@ class OrderController extends ApiController
             return $this->respondNotAcceptable(['msg'=>'Errors in inputs','errors'=>$errors]);
         }
 
-
+        $this->orderManager->create($request)->getDiscountValue("https://developer.github.com/v3/#http-redirects");
 
     }
 }
