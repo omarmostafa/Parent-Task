@@ -92,7 +92,7 @@ $app->singleton(
 | can respond to, as well as the controllers that may handle them.
 |
 */
-
+$app->withFacades();
 $app->router->group([
     'namespace' => 'App\Http\Controllers',
 ], function ($router) {
