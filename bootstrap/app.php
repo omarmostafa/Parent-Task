@@ -93,6 +93,8 @@ $app->singleton(
 |
 */
 $app->withFacades();
+$app->withEloquent();
+$app->configure('config');
 $app->router->group([
     'namespace' => 'App\Http\Controllers',
 ], function ($router) {

@@ -1,5 +1,5 @@
 <?php
-namespace App\Helpers;
+namespace App\Parent;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 class CreateOrderValidator
@@ -30,7 +30,7 @@ class CreateOrderValidator
      */
     public function validate(Request $request)
     {
-        $ordersValidation = Validator::make($request->all(), $this->ordersRules); //consume search validation in request
+        $ordersValidation = Validator::make($request->all(), $this->ordersRules); //consume order validation in request
         return $ordersValidation;
     }
 }
