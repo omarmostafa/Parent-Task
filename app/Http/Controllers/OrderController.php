@@ -33,7 +33,8 @@ class OrderController extends ApiController
             return $this->respondNotAcceptable(['msg'=>'Errors in inputs','errors'=>$errors]);
         }
 
-        $this->orderManager->create($request)->getDiscountValue("https://developer.github.com/v3/#http-redirects");
+        $discountValue=$this->orderManager->create($request)->discountValue("https://developer.github.com/v3/#http-redirects");
 
+        return $this->respondAccepted(['discount_value'=>$discountValue,'total_amount_net'=>$request->order['total_amount_net'],'shipping_costs'=>$request->order['shipping_costs']]);
     }
 }

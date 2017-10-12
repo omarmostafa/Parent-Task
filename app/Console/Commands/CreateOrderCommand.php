@@ -50,8 +50,6 @@ class CreateOrderCommand extends Command
                 $item_element->tags()->create(['name'=>$tag]);
             }
         }
-
         return $order_value;
-
     }
 }

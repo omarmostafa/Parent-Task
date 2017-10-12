@@ -21,6 +21,7 @@ class CreateItemsTable extends Migration
             $table->string('subcategory');
             $table->integer('order_id')->unsigned();
             $table->foreign('order_id')->references('id')->on('orders')->onDelete('cascade');
+            $table->string('collection_id');
             $table->timestamps();
         });
     }

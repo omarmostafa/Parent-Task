@@ -11,9 +11,14 @@ class OrderManager
 
     protected $orderValue;
 
-    public function __construct(Client $client)
+    protected $discountManager;
+    
+    protected $collections;
+
+    public function __construct(Client $client,DiscountManager $discountManager)
     {
         $this->client=$client;
+        $this->discountManager=$discountManager;
     }
 
     public function create($request)
@@ -22,14 +27,18 @@ class OrderManager
             'order' => $request->input('order')
         ]);
         $this->orderValue=$orderValue;
+        $this->collections=$this->getCollections($request);
         return $this;
     }
 
-    public function getDiscountValue($url)
+    public function discountValue($url)
     {
-        $response=file_get_contents($url);
-        $count=substr_count($response,'status');
-        return $count;
+       return $this->discountManager->getDiscountValue($url,$this->collections,$this->orderValue);
+    }
+
+    public function getCollections($request)
+    {
+        return array_column($request->input('order')['items'],'collection_id');
     }
 
 }
