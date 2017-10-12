@@ -26,7 +26,7 @@ class DiscountProvider
 
     public function __construct(DiscountService $service)
     {
-        $this->certainCollections=[12,7]; // set certain collections
+        $this->certainCollections=Config::get('config.collections'); // set certain collections
         $this->service=$service; // dependency injection for discount service
     }
 

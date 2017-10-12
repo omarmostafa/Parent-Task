@@ -39,7 +39,7 @@ class OrderController extends ApiController
             return $this->respondNotAcceptable(['msg'=>'Errors in inputs','errors'=>$errors]);
         }
         $url=Config::get('config.url');
-        $discountValue=$this->orderManager->create($request)->discountValue($url); // call Order manager to create order and get discount value
+        $discountValue=$this->orderManager->create($request->input('order'))->discountValue($url); // call Order manager to create order and get discount value
 
         return $this->respondAccepted(['discount_value'=>$discountValue,'total_amount_net'=>$request->order['total_amount_net'],'shipping_costs'=>$request->order['shipping_costs']]);
     }

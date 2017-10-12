@@ -30,14 +30,14 @@ class OrderManager
 
     /**
      * create order via create order job
-     * @param $request
+     * @param $order
      * @return $this
      */
-    public function create($request)
+    public function create($order)
     {
-        dispatch(new CreateOrderJob($request->input('order'))); //dispatch create order job to persist order
-        $this->orderValue=$request->input('order')['total_amount_net']; //set order total value
-        $this->collections=$this->getCollections($request); //set collections
+        dispatch(new CreateOrderJob($order)); //dispatch create order job to persist order
+        $this->orderValue=$order['total_amount_net']; //set order total value
+        $this->collections=$this->getCollections($order); //set collections
         return $this;
     }
 
@@ -53,12 +53,12 @@ class OrderManager
 
     /**
      * get used collections in order
-     * @param $request
+     * @param $order
      * @return array
      */
-    public function getCollections($request)
+    public function getCollections($order)
     {
-        return array_column($request->input('order')['items'],'collection_id');
+        return array_column($order['items'],'collection_id');
     }
 
 }

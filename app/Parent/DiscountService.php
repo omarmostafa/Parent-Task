@@ -27,7 +27,7 @@ class DiscountService
     {
         $response=$this->client->get($url);
         $response=$response->getBody()->getContents();
-        $count=substr_count($response,Config::get('config.word'));
+        $count=substr_count(strtolower($response),Config::get('config.word'));
         return $count;
     }
 
